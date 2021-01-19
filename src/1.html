@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  {{f1()}}::{{f2()}}<hr>
+  <input type="text" v-model="msg"/>{{msg}}<hr>
+    <aa>
+      <header1 v-bind:p1="user.name"></header1>
+      <bodi :p2="user.pwd"></bodi>
+      <foot :p3="item" v-for="item in items"></foot>
+    </aa>
+  <hr>
+  <hr>
+  <hr><hr><hr><hr>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.5.10/vue.js"></script>
+<script>
+  var app=new Vue({
+    el:"#app",
+    data:{
+      msg:"hello1",
+      user:{
+        name:'qq',
+        pwd:'asd',
+      },
+      items:[
+        {type:'int'},
+        {type:'long'},
+        {type:'boolean'},
+      ]
+    },
+    methods:{
+      f1:function() {
+        return Date.now();
+      },
+      f2() {
+        return Date.now()*2;
+      },
+      f3:function() {
+        alert(this.f1());
+      },
+    },
+    computed:{
+      c1() {
+        return Date.now();
+      }
+    },
+    components:{
+      aa:{
+        template:"<ul>aaaa<slot></slot></ul>"
+      },
+//      props可以将数据从父组件传入子组件，slot可以将html从父组件传入子组件。
+//      v-text='p1+\"!\"'的\"表示转义
+      header1:{
+        props: ['p1'],
+        template:"<h4 v-text='p1+\"!\"'></h4>"
+      },
+      bodi:{
+        props: ['p2'],
+        template:"<h4 v-text='p2+\"66\"'>77</h4>"
+      },
+      foot:{
+        props: ['p3'],
+        template:"<h4 v-text='p3.type'>footer!</h4>"
+      },
+    }
+  })
+</script>
+</body>
+</html>
