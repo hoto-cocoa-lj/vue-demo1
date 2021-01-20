@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <component v-bind:is="mycom"></component>
+  <hr>
+  <span @click="setcomname('t1')">注册</span>
+  <span @click="mycom='t2'">登录</span>
+  <a href="" @click.prevent="setcomname('t3')">注销</a>
+  <component :is="'t2'"></component>
+  <component is="t2"></component>
+  <hr>
+
+  <transition  appear name="my" mode="out-in">
+    <component v-bind:is="mycom"></component>
+  </transition>
+
+
+
+</div>
+<script src="https://cdn.bootcss.com/vue/2.5.10/vue.js"></script>
+
+<!--template可以放在#app里，也可以放外面-->
+<template id="tpl1"><h4>注册</h4></template>
+
+<style>
+  .my-enter,
+  .my-leave-to{
+    opacity: 0;
+    transform: translate(150px,0);
+    /*transform: translateX(150px);*/
+  }
+  .my-enter-active,
+  .my-leave-active{
+    transition: all .5s ease;
+  }
+
+</style>
+<script>
+  var app = new Vue({
+    el: "#app",
+    data() {
+      return {mycom: 't1'}
+    },
+    methods: {
+      setcomname(name) {
+        this.mycom = name
+      }
+    },
+
+    components: {
+      t1: {template: "#tpl1"},
+      t2: {template: "<h4>登录</h4>"},
+    }
+  })
+  Vue.component('t3',{template: "<h4>注销</h4>"})
+</script>
+</body>
+</html>
