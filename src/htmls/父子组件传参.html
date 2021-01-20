@@ -7,17 +7,18 @@
 <body>
 <div id="app">
   {{f1()}}::{{f2()}}<hr>
-  <input type="text" v-model="msg"/>{{msg}}<hr>
+  <input type="text" v-model="msg"  @click="getAjax()" @keyup.enter="add"/>{{msg}}<hr>
     <aa>
       <header1 v-bind:p1="user.name"></header1>
       <bodi :p2="user.pwd"></bodi>
-      <foot :p3="item" v-for="item in items"></foot>
+      <foot :p3="item" :i3="index" v-for="(item,index) in items"></foot>
     </aa>
   <hr>
   <hr>
   <hr><hr><hr><hr>
 </div>
 <script src="https://cdn.bootcss.com/vue/2.5.10/vue.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.js"></script>
 <script>
   var app=new Vue({
     el:"#app",
@@ -43,6 +44,19 @@
       f3:function() {
         alert(this.f1());
       },
+      add(){
+        this.items.push({type:this.msg})
+      },
+      getAjax(){
+        axios.get("../1.json")
+          .then(function(rep){
+            console.log(rep);
+          })
+          .catch(function(err){
+            console.log(err);
+          })
+      }
+
     },
     computed:{
       c1() {
@@ -64,8 +78,15 @@
         template:"<h4 v-text='p2+\"66\"'>77</h4>"
       },
       foot:{
-        props: ['p3'],
-        template:"<h4 v-text='p3.type'>footer!</h4>"
+        props: ['p3','i3'],
+        template:"<h4 v-text='i3+\":\"+p3.type'   @click='del(i3)' >footer!</h4>",
+        methods: {
+          del(i){
+            // this是VueComponent  app是Vue
+            console.log(this);console.log(app);
+            app.items.splice(i,1);
+          }
+        }
       },
     }
   })
