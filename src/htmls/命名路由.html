@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <router-link to="/l">toL</router-link>
+  <router-link to="/l/i/aa?id=33">toLI</router-link>
+  <router-link to="/h">toH</router-link>
+  <router-view name="hh"></router-view>
+  <router-view name="ll"></router-view>
+  <router-view name="rr"></router-view>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.5.10/vue.js"></script>
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/vue-router/3.4.8/vue-router.js"></script>
+<script>
+  var header = {template: "<div class='header'>header</div>"};
+  var left = {template: "<div><div class='left'>left{{msg}}</div><router-view></router-view></div>",
+    };
+  var right = {template: "<div class='right'>right</div>"};
+  //访问时#/l/i/aa?id=33，$route.query.id=33，$route.params.name=aa，
+  //注意设置path:'i/:name'才能在params拿到name，?id=33可以在query里拿到id
+  var inner= {template: "<div><input v-model='$route.query.id'/><input v-model='$route.params.name'/></div>"};
+
+  var router = new VueRouter({
+    linkActiveClass:'myactive',
+    routes: [
+      // 让/转到/h
+      { path:'/',redirect:"/h"},
+      { path: '/h',
+        components:{
+          hh: header,
+          ll: left,
+          rr: right,
+        },
+      },
+      // 如果router-view没有设置名字，{path:'/l',component:left}即可
+      { path:'/l',
+        components:{ll:left},
+        children:[{path:'i/:name',component:inner}]
+      },
+    ]
+  })
+  var app = new Vue({
+    el: "#app",
+    data: {msg:'i am app'},
+    //router:router //key和value一样时直接写key就行，其他属性一样
+    router,
+  })
+</script>
+<style>
+  .left, .right, .header {
+    height: 100px;
+    width: 50%;
+  }
+
+  .header {
+    background: #3ff
+  }
+
+  .left {
+    background: #ff3;
+    float: left;
+  }
+
+  .right {
+    background: #f3f;
+    float: left;
+  }
+  .myactive{
+    color:red;
+  }
+</style>
+</body>
+</html>

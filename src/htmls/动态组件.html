@@ -15,6 +15,7 @@
   <component is="t2"></component>
   <hr>
 
+<!--  appear：默认的选择加载时也有动画效果，mode：动画的显示效果，out-in：原组件消失后新组建再出现 -->
   <transition  appear name="my" mode="out-in">
     <component v-bind:is="mycom"></component>
   </transition>
@@ -28,6 +29,7 @@
 <template id="tpl1"><h4>注册</h4></template>
 
 <style>
+  /*自定义动画名为my，需要修改v-enter*/
   .my-enter,
   .my-leave-to{
     opacity: 0;

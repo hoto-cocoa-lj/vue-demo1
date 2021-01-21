@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <router-link to="/l">toL</router-link>
+  <router-link to="/l/i">toLI</router-link>
+  <router-view></router-view>
+
+</div>
+<script src="https://cdn.bootcss.com/vue/2.5.10/vue.js"></script>
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/vue-router/3.4.8/vue-router.js"></script>
+<script>
+  var left = {template: "<div><div class='left'>left</div><router-view></router-view></div>"};
+  var right = {template: "<div class='right'>right</div>"};
+
+  var router = new VueRouter({
+    linkActiveClass: 'myactive',
+    routes: [
+      {path: '/', redirect: "/l"},
+      {
+        path: '/l',
+        component: left,
+        children: [{path: '/l/i', component: right}]
+      },
+    ]
+  })
+  var app = new Vue({
+    el: "#app",
+    data: {},
+    methods: {},
+    components: {},
+    //router:router //key和value一样时直接写key就行，其他属性一样
+    router,
+  })
+</script>
+<style>
+  .left, .right {
+    height: 100px;
+    width: 50%;
+  }
+
+  .left {
+    background: #ff3;
+    float: left;
+  }
+
+  .right {
+    background: #f3f;
+    float: right;
+  }
+
+  .myactive {
+    color: red;
+  }
+</style>
+</body>
+</html>

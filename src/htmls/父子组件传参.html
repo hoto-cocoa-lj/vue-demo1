@@ -9,7 +9,7 @@
   {{f1()}}::{{f2()}}<hr>
   <input type="text" v-model="msg"  @click="getAjax()" @keyup.enter="add"/>{{msg}}<hr>
     <aa>
-      <header1 v-bind:p1="user.name"></header1>
+      <header1 v-bind:p1="user.name" @headerfunc='f3'></header1>
       <bodi :p2="user.pwd"></bodi>
       <foot :p3="item" :i3="index" v-for="(item,index) in items"></foot>
     </aa>
@@ -41,8 +41,8 @@
       f2() {
         return Date.now()*2;
       },
-      f3:function() {
-        alert(this.f1());
+      f3:function(a1="",a2="") {
+        alert(this.f1()+a1+a2);
       },
       add(){
         this.items.push({type:this.msg})
@@ -71,7 +71,12 @@
 //      v-text='p1+\"!\"'的\"表示转义
       header1:{
         props: ['p1'],
-        template:"<h4 v-text='p1+\"!\"'></h4>"
+        template:"<h4 v-text='p1+\"!\"'  @click='ff'></h4>",
+        methods:{
+          ff:function (){
+            this.$emit('headerfunc',":",new Date())
+          }
+        }
       },
       bodi:{
         props: ['p2'],
