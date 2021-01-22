@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <input @keyup="f" v-model="person.name"/>
+  <input v-model="user"/>
+
+
+</div>
+<script src="https://cdn.bootcss.com/vue/2.5.10/vue.js"></script>
+
+
+<script>
+  var app = new Vue({
+    el: "#app",
+    data() {
+      return {person: {name: ''}, user: ''}
+    },
+    methods: {
+      f: function () {
+        console.log(this.person.name)
+      }
+    },
+    watch: {
+      user: function (val, oldval) {
+        console.log("val:" + val)
+        console.log("oldval:" + oldval)
+      },
+      person: {
+        //这里oldval始终等于val
+        handler: function (val, oldval) {
+          console.log("val:" + JSON.stringify(val))
+          console.log("oldval:" + JSON.stringify(oldval))
+        },
+        deep:true
+      },
+    }
+  })
+</script>
+</body>
+</html>
