@@ -1,0 +1,17 @@
+1，webpack.config.js和package.json要放同一个路径下。。。
+2，cmd运行webpack，会在当前路径下找webpack.config.js，进行配置打包。
+3，cmd运行webpack run dev，会执行webpack-dev-server，也是在当前路径下找webpack.config.js，
+打包后在内存里生成bundle.js，路径是ip:port/bundle.js。
+修改entry的js，会自动修改内存的bundle.js，不会自动修改dist里的bundle.js。
+4，https://stackoverflow.com/questions/64294706/webpack5-automatic-publicpath-is-not-supported-in-this-browser
+报错Automatic publicPath is not supported in this browser，在output里加上publicPath: ''可解决，原因不明。
+修改publicPath会修改webpack output is served from后面的路径。
+5,打包css：
+    1，项目内安装style-loader和css-loader
+    2，webpack.config.js里配置
+        module: {
+              rules: [
+                  {test:/\.css$/,use:['style-loader','css-loader']},
+              ]
+        }，表示用style-loader','css-loader'匹配以.css结尾的文件。
+6，配置less和sass，下载对应的load，webpack.config.js里配置rules，详情baidu
