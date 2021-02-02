@@ -15,3 +15,14 @@
               ]
         }，表示用style-loader','css-loader'匹配以.css结尾的文件。
 6，配置less和sass，下载对应的load，webpack.config.js里配置rules，详情baidu
+7，打包图片，需要npm i url-loader file-loader，设置{test:/\.(jpG|jpeg|png|gif|bmp)$/i,use:['url-loader']},注意i设置忽略大小写。
+8，url-loader?limit=200&name=[name]，表示图片小于等于200b时，在css文件里图片转成base64编码，否则以图片格式。[name]表示使用原文件名。
+9，webpack.config.js里设置
+      resolve: {
+          alias: {
+              'vue$':'vue/dist/vue.js'
+          }
+      }，
+可以指定import 'vue'时去哪里找，否则会从node_modules/vue/package.json里找main对应的dist/vue.runtime.common.js。
+10，render:c=>c(routertest)会用routertest组件替换掉#app里的所有东西，
+而#app里设置<routertest></routertest>只会用routertest组件替换该部分。

@@ -5,13 +5,33 @@
   "author": "Ironi333 <6---@qq.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --open --port 3333 --contentBase ./src --hot"
+    "dev": "webpack-dev-server --open --port 3333 --contentBase ./src --hot",
+    "dev1": "webpack-dev-server --open --port 3333  --hot",
+    "aaa": "mkdir aaa && cd aaa && echo att>a.txt"
   },
-  "dependencies": {
-    "jquery": "^3.5.1"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "webpack": "^5.16.0",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-transform-react-jsx": "^7.12.12",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "babel-loader": "^8.2.2",
+    "bootstrap": "^3.4.1",
+    "css-loader": "^5.0.1",
+    "file-loader": "^6.2.0",
+    "jquery": "^3.5.1",
+    "less": "^4.1.0",
+    "less-loader": "^7.3.0",
+    "sass": "^1.32.5",
+    "sass-loader": "^10.1.1",
+    "style-loader": "^2.0.0",
+    "url-loader": "^4.1.1",
+    "vue": "^2.6.12",
+    "vue-loader": "^15.9.6",
+    "vue-router": "^3.5.1",
+    "vue-template-compiler": "^2.6.12",
+    "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.2"
   }
